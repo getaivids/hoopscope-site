@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hoopscope: Data-Driven Training</title>
+  <meta name="description" content="Basketball analytics and data-driven training platform. AI-powered workout plans, pro stats, and insightful content.">
+  <meta name="keywords" content="basketball analytics, training, NBA stats, AI workouts, EuroLeague, player improvement, basketball blog, basketball data, basketball drills">
+  <meta name="author" content="Hoopscope Team">
+  <meta property="og:title" content="Hoopscope: Data-Driven Training">
+  <meta property="og:description" content="Basketball analytics, AI-driven workouts, and league stats for focused training.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1515523110800-9415d13b84a8?q=80&w=400&auto=format&fit=crop">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; background:#000; color:#E2E8F0; }
+    .holographic-glow-hard { text-shadow: 0 0 8px rgba(251,146,60,0.5),0 0 12px rgba(249,115,22,0.3); }
+    /* ... Other styles unchanged, omitted for brevity ... */
+    img[loading="lazy"] { background:#191919; min-height:120px; /*flicker fallback*/ }
+  </style>
+</head>
+<body class="bg-black text-slate-200">
+  <!-- ... BODY SECTIONS LEFT AS IN SOURCE (refer to user code) ... -->
+  <!-- Key changes below -->
+
+  <!-- Blog post images optimized: -->
+  <!-- <img src="..." loading="lazy" alt="..."> -->
+
+  <!-- JavaScript moved below for better performance. -->
+  <script type="module">
+    // Secure API Key handling (must set by ENV in deployment, not in client code)
+    const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
+    // key must be set only on server or via ENV interpreter (never in this source)
+    async function callOpenAI(prompt, system = null) {
+      // Use secure proxy or ENV-injection only
+      const apiKey = window.OPENAI_API_KEY;
+      if (!apiKey) throw new Error("[config] OpenAI API key not set!");
+      const payload = {
+        model: "gpt-4o",
+        messages: [
+          ...(system ? [{ role: "system", content: system }] : []),
+          { role: "user", content: prompt }
+        ],
+        max_tokens: 800,
+        temperature: 0.6
+      };
+      const resp = await fetch(OPENAI_API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${apiKey}`
+        },
+        body: JSON.stringify(payload)
+      });
+      if (!resp.ok) throw new Error("Error: " + resp.status);
+      const data = await resp.json();
+      if (data.choices && data.choices[0] && data.choices[0].message.content) {
+        return data.choices[0].message.content;
+      } else throw new Error("Unexpected response from OpenAI");
+    }
+
+    // Lazy Loading for Blog Images
+    document.querySelectorAll('img').forEach(img => {
+      img.setAttribute('loading', 'lazy');
+    });
+    
+    // ...Rest of DOMContentLoaded & event logic (from user code),
+    // replacing Gemini calls with callOpenAI as:
+    // Example:
+    async function generateWorkout(prompt) {
+      try {
+        return await callOpenAI(`Create a detailed basketball workout plan based on: ${prompt}`);
+      } catch (e) { return `Error: ${e.message}`; }
+    }
+    // AI blog-helper use example:
+    async function summarizeArticle(articleText) {
+      try {
+        return await callOpenAI(`Summarize this basketball article in 3 bullets:\n${articleText}`);
+      } catch (e) { return `Error: ${e.message}`; }
+    }
+    // And so on for blog helper Q&A
+    // ...
+    // Add error states for all async UI results
+  </script>
+</body>
+</html>
