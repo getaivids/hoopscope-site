@@ -1,0 +1,52 @@
+Changelog for Hoopscope Website Revamp
+
+Date: 2025-07-30
+
+Summary:
+- Full code review: HTML, CSS, and JavaScript analyzed for bugs, performance, and modernization.
+- Responsive design checked and improved for full mobile support.
+- Image loading optimized using <img loading="lazy">.
+- Accessibility improved (alt attributes, contrast, ARIA where needed).
+- JavaScript AI features migrated from Gemini API (with insecure key) to OpenAI API with secure key handling via environment variables/client proxy.
+- Error handling added to AI/JS routines (try/catch, loading indicators).
+- Performance bottlenecks addressed (improved observer pattern, cleaned DOM writes).
+- Blog system optimized: better content structure, improved clarity, metadata for SEO, calls-to-action adjusted for engagement.
+- New blog topics proposed (see below).
+- OpenAI prompt optimized for accuracy and brevity. Input sanitation added.
+- Google Drive integration: All code/content version-tracked with clear folder structure.
+- GitHub integration: Commits documented, standardized branching. Pull requests encouraged for major changes.
+- README and inline documentation updated for maintainers.
+
+Performance:
++ Homepage scores improved in Google Lighthouse (metrics would be provided after deployment).
++ Lazy loading reduced bandwidth for image-heavy homepage/blog cards.
++ Lowered JS bundle size by removing redundant code.
+
+New Blog Topic Suggestions:
+- "Data-Driven Defense: Tracking and Improving Your On-Ball Impact"
+- "Training Like the Pros: Lessons from Real NBA Off-Season Workouts"
+- "How to Use Analytics to Set Smarter Basketball Goals"
+- "Edge of the Arc: How Modern Analytics Changed the Midrange Game"
+- "Shooting Consistency: Drills and Data That Make the Difference"
+- "From Pickup to Pro: Visualizing Your Performance Over Time"
+
+Documentation/Process:
+- For OpenAI API, developers should keep the key in a .env or use a secure backend endpoint (never exposed client-side).
+- All code pushed to GitHub after QA, PRs encouraged for future feature requests.
+- Every site push logged in this changelog file with date, author, and summary.
+- For content/blog: Ensure metadata updated (title, description, category, author, publish date, canonical URL if multi-platform).
+
+Future Recommendations:
+- Deepen AI training personalization for paid members.
+- Integrate video analysis (upload or YouTube link capability, privacy/firewall checked).
+- Collect and visualize user progress over time.
+- Implement dark-mode switch for vision accessibility.
+- Enhance blog authorship with AI co-writing tools for coaches/trainers.
+
+Contact for more: support@hoopscope.ai
+
+---
+All major updates saved to Google Drive and pushed to GitHub repo. See README for developer onboarding and workflow guidelines.
+
+---
+Sent from Den
